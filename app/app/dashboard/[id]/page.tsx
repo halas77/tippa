@@ -2,6 +2,7 @@ import Footer from "@/app/(landing)/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatusCard from "./(dashboard)/StatusCard";
 import Welcome from "./(dashboard)/Welcome";
+import Campaign from "./(campaign)/Campaign";
 
 export default function DashboardPage() {
   return (
@@ -17,7 +18,7 @@ export default function DashboardPage() {
             <Welcome />
           </TabsContent>
           <TabsContent value="campaigns">
-            Change your password here.
+            <Campaign />
           </TabsContent>
         </Tabs>
         <Footer />
