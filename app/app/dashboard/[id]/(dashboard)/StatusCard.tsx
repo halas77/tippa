@@ -1,17 +1,10 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import React from "react";
 
 const StatusCard = () => {
-  const { username } = useParams();
-
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-medium text-[#D2B48C]">
-        {username}&apos;s Dashboard
-      </h1>
-
       <div className="grid grid-cols-3 gap-4">
         <StatBox title="Total Tips" value="36 USDC" />
         <StatBox title="Supporters" value="24" />

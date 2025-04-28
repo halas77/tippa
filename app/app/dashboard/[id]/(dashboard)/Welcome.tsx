@@ -49,7 +49,7 @@ const Welcome: React.FC = () => {
     },
   });
 
-  const { username } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,10 +58,8 @@ const Welcome: React.FC = () => {
         const { data, error } = await supabase
           .from("creators")
           .select("*, history(*)")
-          .eq("name", username)
+          .eq("id", id)
           .single();
-
-        console.log("data", data);
 
         if (error) throw error;
 
@@ -83,8 +81,8 @@ const Welcome: React.FC = () => {
       }
     };
 
-    if (username) fetchData();
-  }, [username, reset]);
+    if (id) fetchData();
+  }, [id, reset]);
 
   const handleEditWelcomeMessage = async (newMessage: string) => {
     setMessageLoading(true);
@@ -92,7 +90,7 @@ const Welcome: React.FC = () => {
       const { error } = await supabase
         .from("creators")
         .update({ message: newMessage })
-        .eq("name", username);
+        .eq("id", id);
 
       if (error) throw error;
 
@@ -114,7 +112,7 @@ const Welcome: React.FC = () => {
       const { error } = await supabase
         .from("creators")
         .update({ [platform]: newLink })
-        .eq("name", username);
+        .eq("id", id);
 
       if (error) throw error;
 
