@@ -25,7 +25,7 @@ const SuccessPage = () => {
     
     Check it out here: ${tipUrl}
   
-    #TipsForGood #SupportCreators #TipWithTyppr`
+    #TipsForGood #SupportCreators #TipWithtippa`
   );
   const twitterUrl = `https://x.com/intent/post?text=${tweetText}`;
 

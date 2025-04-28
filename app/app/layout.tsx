@@ -9,7 +9,7 @@ const poppins = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "Typpr",
+  title: "tippa",
   description: "Tipping made easy",
   icons: {
     icon: "/logo.png",

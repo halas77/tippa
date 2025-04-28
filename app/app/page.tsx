@@ -5,7 +5,7 @@ import Footer from "./(landing)/Footer";
 
 const page = () => {
   return (
-    <div className="flex flex-col justify-center items-center w-full mx-auto">
+    <div className="flex flex-col justify-center items-center w-full mx-auto overflow-x-clip">
       <Navbar />
       <Hero />
       <HowItWorks />

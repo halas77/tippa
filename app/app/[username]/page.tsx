@@ -288,7 +288,7 @@ export default function TipPage() {
             </form>
 
             <p className="text-center text-sm text-[#E5DCC3]/70 mt-4">
-              Powered by typpr • 100% on-chain
+              Powered by tippa • 100% on-chain
             </p>
           </CardContent>
         </Card>

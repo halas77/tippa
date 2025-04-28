@@ -136,7 +136,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          Typpr lets creators receive global tips and support with
+          Tippa lets creators receive global tips and support with
           blockchain-powered security and transparency—anywhere, anytime, with
           seamless withdrawals.
         </motion.p>

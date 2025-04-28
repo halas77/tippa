@@ -30,8 +30,8 @@ const Navbar = () => {
       <div className="container mx-auto flex h-16 items-center justify-between mt-2">
         <div className="flex items-center gap-3">
           <div className="relative"></div>
-          <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-3xl font-bold tracking-tighter text-transparent font-serif">
-            typpr.
+          <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-3xl font-extrabold tracking-normal text-transparent font-serif">
+            tippa.
           </span>
         </div>
         <div className="flex gap-4">
