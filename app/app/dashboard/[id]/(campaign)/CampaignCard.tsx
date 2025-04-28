@@ -15,6 +15,7 @@ export interface CampaignType {
   collected_amount: number;
   start_date: string;
   end_date: string;
+  campaign_url: string;
 }
 
 const CampaignCard = (campaign: CampaignType) => {

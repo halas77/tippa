@@ -37,6 +37,8 @@ const AddCampaign = () => {
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
+
+    const campaign_url = `localhost:3000/campaigns/${data?.title}`;
     const { error } = await supabase.from("campaigns").insert([
       {
         title: data.title,
@@ -47,6 +49,7 @@ const AddCampaign = () => {
         target_amount: data.target_amount,
         collected_amount: 0,
         user_id: id,
+        campaign_url: campaign_url,
       },
     ]);
 

@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { supabase } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CampaignType } from "../CampaignCard";
+import CopyCampaign from "./CopyCampaign";
 
 const CampaignDetail = () => {
   const [campaign, setCampaign] = useState<CampaignType>();
@@ -38,10 +39,11 @@ const CampaignDetail = () => {
   return (
     <div className="min-h-screen bg-[#1A120B] p-8">
       <div className="mx-auto max-w-7xl space-y-8">
-        <header>
+        <header className="flex justify-between">
           <h1 className="text-3xl font-bold text-[#F9D7A2]">
             Campaign Overview
           </h1>
+          <CopyCampaign tipLink={campaign?.campaign_url || ""} />
         </header>
 
         <section className="rounded-2xl bg-[#2C2011] p-8 shadow-xl">
@@ -101,7 +103,6 @@ const CampaignDetail = () => {
   );
 };
 
-// Helper components
 const Label = ({ children }: { children: React.ReactNode }) => (
   <p className="mb-2 text-sm font-medium uppercase tracking-wider text-[#D2B48C]">
     {children}
@@ -121,8 +122,7 @@ const MetricCard = ({
   </div>
 );
 
-// Loading skeleton matching the layout
-const LoadingSkeleton = () => (
+export const LoadingSkeleton = () => (
   <div className="min-h-screen bg-[#1A120B] p-8">
     <div className="mx-auto max-w-7xl space-y-8">
       <Skeleton className="h-12 w-64 bg-[#2C2011]" />
@@ -152,7 +152,6 @@ const LoadingSkeleton = () => (
   </div>
 );
 
-// Date formatting utility
 const formatDate = (dateString?: string) => {
   if (!dateString) return "N/A";
   return new Date(dateString).toLocaleDateString("en-US", {
