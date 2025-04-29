@@ -52,7 +52,9 @@ export default function CreatePage() {
           youtube: data.youtube,
           creator_link: creatorLink,
         },
-      ]);
+      ])
+      .select("id")
+      .single();
 
     if (error) {
       console.error("Error inserting data:", error);
@@ -64,7 +66,7 @@ export default function CreatePage() {
         description: "User has been created successfully.",
       });
       console.log("Data inserted successfully:", insertedData);
-      window.location.href = `/dashboard/${data.name}`;
+      window.location.href = `/dashboard/${insertedData?.id}`;
       reset();
     }
   };
