@@ -4,11 +4,14 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+
 import { Progress } from "@/components/ui/progress";
 import React from "react";
+import CampaignDetail from "./CampaignDetail";
 
 export interface CampaignType {
   id: number;
+  image: string;
   title: string;
   description: string;
   target_amount: number;
@@ -19,8 +22,11 @@ export interface CampaignType {
 }
 
 const CampaignCard = (campaign: CampaignType) => {
+  const progressPercentage =
+    (campaign.collected_amount / campaign.target_amount) * 100;
+
   return (
-    <Card className="bg-[#2C2011] hover:bg-[#2C2011]/80 border border-[#3A2F26]">
+    <Card className="bg-[#2C2011]  border border-[#3A2F26]">
       <CardHeader>
         <h3 className="text-xl font-bold text-[#F9D7A2]">{campaign.title}</h3>
       </CardHeader>
@@ -30,17 +36,10 @@ const CampaignCard = (campaign: CampaignType) => {
           <div className="flex justify-between text-sm">
             <span className="text-[#C67F43]">Raised</span>
             <span className="text-[#FAF3E0]">
-              {(
-                (campaign.collected_amount / campaign.target_amount) *
-                100
-              ).toFixed(1)}
-              %
+              {progressPercentage.toFixed(1)}%
             </span>
           </div>
-          <Progress
-            value={(campaign.collected_amount / campaign.target_amount) * 100}
-            className="h-2 bg-[#2C1A0D]"
-          />
+          <Progress value={progressPercentage} className="h-2 bg-[#2C1A0D]" />
           <div className="flex justify-between text-sm">
             <span className="text-[#FAF3E0]/70">
               {campaign.collected_amount} ETH of {campaign.target_amount} ETH
@@ -52,6 +51,7 @@ const CampaignCard = (campaign: CampaignType) => {
         <span className="text-sm text-red-400">
           Ends: {new Date(campaign.end_date).toLocaleDateString()}
         </span>
+        <CampaignDetail {...campaign} />
       </CardFooter>
     </Card>
   );

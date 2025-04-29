@@ -6,7 +6,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { CampaignType } from "@/app/dashboard/[id]/(campaign)/CampaignCard";
-import { LoadingSkeleton } from "@/app/dashboard/[id]/(campaign)/[campaignId]/CampaignDetail";
 
 const Page = () => {
   const [campaign, setCampaign] = useState<CampaignType>();
@@ -35,7 +34,7 @@ const Page = () => {
     fetchCampaign();
   }, [id]);
 
-  if (loading) return <LoadingSkeleton />;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="min-h-screen p-8">
