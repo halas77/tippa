@@ -10,7 +10,7 @@ import React from "react";
 import CampaignDetail from "./CampaignDetail";
 
 export interface CampaignType {
-  id: number;
+  id: string;
   image: string;
   title: string;
   description: string;
