@@ -12,29 +12,30 @@ import Contribute from "./Contribute";
 
 const Page = () => {
   const [campaign, setCampaign] = useState<CampaignType>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
+  const decodedText = typeof id === "string" ? decodeURIComponent(id) : "";
+
+  const refetchCampaign = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("campaigns")
+      .select("*")
+      .eq("title", decodedText)
+      .single();
+
+    if (error) {
+      console.error("Error fetching campaign:", error);
+    } else {
+      setCampaign(data);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const decodedText = typeof id === "string" ? decodeURIComponent(id) : "";
-    const fetchCampaign = async () => {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("campaigns")
-        .select("*")
-        .eq("title", decodedText)
-        .single();
-
-      if (error) {
-        console.error("Error fetching campaign:", error);
-      } else {
-        setCampaign(data);
-      }
-      setLoading(false);
-    };
-
-    fetchCampaign();
+    refetchCampaign();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (loading) return <Loading />;
@@ -49,7 +50,7 @@ const Page = () => {
           <TabsTrigger value="campaignInfo">Campaign Info</TabsTrigger>
         </TabsList>
         <TabsContent value="contribute">
-          <Contribute {...campaign} />
+          <Contribute campaign={campaign} refetchCampaign={refetchCampaign} />
         </TabsContent>
         <TabsContent value="campaignInfo">
           <CampaignInfo {...campaign} />

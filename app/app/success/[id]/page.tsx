@@ -5,17 +5,6 @@ import { useParams } from "next/navigation";
 import React from "react";
 
 const SuccessPage = () => {
-  // const handleInstagramShare = () => {
-  //   const text =
-  //     "I just sent a tip using this awesome platform! Check it out! #TipsForGood";
-  //   navigator.clipboard.writeText(text);
-
-  //   const instagramUrl = `https://www.instagram.com/share?text=${encodeURIComponent(
-  //     text
-  //   )}`;
-  //   window.open(instagramUrl, "_blank");
-  // };
-
   const { id } = useParams();
 
   const tipUrl = `localhost:3000/tip/${id}`;
@@ -43,18 +32,11 @@ const SuccessPage = () => {
             href={twitterUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center  gap-2 px-4 py-2 bg-gradient-to-r from-gray-800/50 to-gray-00/50 text-white rounded-lg hover:bg-gray-900/50 transition-colors cursor-pointer"
+            className="flex items-center justify-center  gap-2 px-4 py-2 bg-gradient-to-r from-primary/30 to-primary/30 text-white rounded-lg hover:bg-gray-900/50 transition-colors cursor-pointer"
           >
             <p className="mr01 font-medium">X</p>
             Share on X (twitter)
           </a>
-          {/* <button
-            onClick={handleInstagramShare}
-            className="flex items-center gap-2 px-4 py-2 justify-center bg-gradient-to-r from-purple-500/50 to-pink-500/40 text-white rounded-lg hover:opacity-90 transition-opacity cursor-pointer "
-          >
-            <Instagram className="w-5 h-5" />
-            Share on Instagram
-          </button> */}
         </div>
       </div>
     </div>

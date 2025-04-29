@@ -1,10 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import { CampaignType } from "@/app/dashboard/[id]/(campaign)/CampaignCard";
+import { customScrollBar } from "@/lib/utils";
 
 const CampaignInfo = (campaign: CampaignType) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-1 gap-8 bg-[#2C2011] border border-[#3A2F26] rounded-2xl p-6">
+    <div
+      className={`grid grid-cols-1 md:grid-cols-1 gap-8 bg-[#2C2011] border border-[#3A2F26] rounded-2xl p-6 h-[520px] overflow-y-auto ${customScrollBar}`}
+    >
       <div className="w-full rounded-2xl">
         <Image
           src={"/faitto.png"}
@@ -19,14 +22,14 @@ const CampaignInfo = (campaign: CampaignType) => {
       <div className="space-y-6">
         <div>
           <p className="text-[#D2B48C] text-sm mb-1">Campaign Title</p>
-          <h2 className="text-2xl font-semibold text-[#E5DCC3]">
+          <h2 className="text-lg md:text-2xl font-semibold text-[#E5DCC3]">
             {campaign?.title}
           </h2>
         </div>
 
         <div>
           <p className="text-[#D2B48C] text-sm mb-1">Description</p>
-          <p className="text-[#E5DCC3] leading-relaxed">
+          <p className="text-[#E5DCC3] text-sm leading-relaxed">
             {campaign?.description}
           </p>
         </div>

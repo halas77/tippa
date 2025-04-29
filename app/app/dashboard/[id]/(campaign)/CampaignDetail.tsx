@@ -32,7 +32,7 @@ const CampaignDetail = (campaign: CampaignType) => {
       </DialogTrigger>
 
       <DialogContent
-        className={`sm:max-w-5xl bg-[#1A120B] border border-[#3A2F26] p-6 rounded-2xl h-96 overflow-y-auto `}
+        className={`sm:max-w-5xl bg-[#1A120B] border border-[#3A2F26] p-6 rounded-2xl h-[500px] overflow-y-auto `}
       >
         <DialogHeader>
           <DialogTitle className="text-2xl text-[#E5DCC3] font-bold">

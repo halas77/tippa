@@ -28,10 +28,16 @@ const CampaignCard = (campaign: CampaignType) => {
   return (
     <Card className="bg-[#2C2011]  border border-[#3A2F26]">
       <CardHeader>
-        <h3 className="text-xl font-bold text-[#F9D7A2]">{campaign.title}</h3>
+        <h3 className="text-lg font-semibold text-[#F9D7A2]">
+          {campaign.title}
+        </h3>
       </CardHeader>
       <CardContent className="space-y-4">
-        <p className="text-[#FAF3E0]/80">{campaign.description}</p>
+        <p className="text-[#FAF3E0]/80 text-sm">
+          {campaign.description.length > 20
+            ? `${campaign.description.slice(0, 20)}...`
+            : campaign.description}
+        </p>
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-[#C67F43]">Raised</span>
@@ -49,7 +55,15 @@ const CampaignCard = (campaign: CampaignType) => {
       </CardContent>
       <CardFooter className="flex justify-between">
         <span className="text-sm text-red-400">
-          Ends: {new Date(campaign.end_date).toLocaleDateString()}
+          {(() => {
+            const endDate = new Date(campaign.end_date);
+            const today = new Date();
+            const timeDiff = endDate.getTime() - today.getTime();
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            return daysLeft > 0
+              ? `Ends in ${daysLeft} day${daysLeft > 1 ? "s" : ""}`
+              : "Campaign ended";
+          })()}
         </span>
         <CampaignDetail {...campaign} />
       </CardFooter>
