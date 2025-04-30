@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { Lightbulb, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { ConnectAndSIWE } from "@/components/shared/ConnectAndSIWE";
 
 // Animation variants
 const badgeVariants = {
@@ -151,16 +151,7 @@ const Hero = () => {
           }}
         >
           <motion.div variants={buttonVariants}>
-            <Link href="/create">
-              <Button
-                size="lg"
-                variant="outline"
-                className="z-20 text-lg px-8 py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm cursor-pointer bg-primary hover:bg-primary/80"
-              >
-                Create Account
-                <Sparkles className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+            <ConnectAndSIWE />
           </motion.div>
 
           <motion.div variants={buttonVariants}>
@@ -171,7 +162,6 @@ const Hero = () => {
                 className="z-20 text-lg px-8 py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
               >
                 How It Works
-                <Lightbulb className="ml-2 h-5 w-5" />
               </Button>
             </Link>
           </motion.div>
