@@ -2,14 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { ConnectAndSIWE } from "./ConnectAndSIWE";
-import { useAccount } from "wagmi";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const account = useAccount();
-
-  console.log("account", account.address);
 
   useEffect(() => {
     const handleScroll = () => {

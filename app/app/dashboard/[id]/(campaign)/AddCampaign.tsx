@@ -142,27 +142,6 @@ const AddCampaign = ({ fetchData }: { fetchData: () => void }) => {
             )}
           </div>
 
-          {/* Image URL */}
-          <div className="space-y-2">
-            <Label
-              htmlFor="imageURL"
-              className="text-[#F9D7A2]/90 font-normal text-xs"
-            >
-              Image URL
-            </Label>
-            <Input
-              id="imageURL"
-              placeholder="https://example.com/image.png"
-              {...register("imageURL", { required: "Image URL is required" })}
-              className="bg-[#1A120B]/50 border-[#3A2F26] focus:ring-2 focus:ring-[#D2B48C] text-[#E5DCC3] placeholder-[#3A2F26] py-5 text-start"
-            />
-            {errors.imageURL && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.imageURL.message}
-              </p>
-            )}
-          </div>
-
           {/* Target Amount */}
           <div className="space-y-2">
             <Label

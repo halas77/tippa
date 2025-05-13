@@ -11,7 +11,7 @@ const poppins = Rubik({
 
 export const metadata: Metadata = {
   title: "tippa",
-  description: "Tipping made easy",
+  description: "Social media tipping layer",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",

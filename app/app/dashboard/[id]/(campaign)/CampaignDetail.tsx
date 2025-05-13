@@ -46,8 +46,8 @@ const CampaignDetail = (campaign: CampaignType) => {
             <Image
               width={500}
               height={300}
-              src="/faitto.png"
-              alt={campaign?.title}
+              src={"/place.png"}
+              alt={campaign?.title || "Campaign Image"}
               className="w-full h-60 object-cover rounded-xl border border-[#3A2F26]"
             />
           </div>

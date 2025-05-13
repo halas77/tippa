@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { supabase } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import { useAccount } from "wagmi";
 
 type FormData = {
   name: string;
@@ -32,12 +33,12 @@ export default function CreatePage() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
+  const account = useAccount();
+
   const [checking, setChecking] = useState(false);
   const [isUnique, setIsUnique] = useState(false);
 
   const onSubmit = async (data: FormData) => {
-    console.log("Form submitted:", data);
-
     const creatorLink = "http://localhost:3000/" + data.name;
 
     const { data: insertedData, error } = await supabase
@@ -51,6 +52,7 @@ export default function CreatePage() {
           tiktok: data.tiktok,
           youtube: data.youtube,
           creator_link: creatorLink,
+          address: account.address,
         },
       ])
       .select("id")
