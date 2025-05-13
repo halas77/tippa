@@ -29,7 +29,7 @@ const buttonVariants = {
 
 const Hero = () => {
   return (
-    <section className="relative pt-36 pb-20">
+    <section className="relative pt-28 md:pt-36 pb-16 md:pb-20">
       {/* Animated Background */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -77,7 +77,7 @@ const Hero = () => {
         >
           <Badge
             variant="outline"
-            className="mb-4 border-primary rounded-xl px-4 text-lg text-primary"
+            className="mb-4 border-primary rounded-xl px-4 text-sm sm:text-base md:text-lg text-primary"
           >
             Powered by blockchain
           </Badge>
@@ -85,53 +85,51 @@ const Hero = () => {
 
         {/* Headline */}
         <motion.h1
-          className="mx-auto max-w-6xl text-6xl font-extrabold leading-tight text-white"
+          className="mx-auto max-w-3xl sm:max-w-4xl md:max-w-6xl text-4xl sm:text-4xl md:text-7xl font-extrabold leading-snug sm:leading-tight text-white"
           variants={headlineVariants}
           initial="initial"
           animate="animate"
         >
-          {["Global tips. Seamless withdrawals.", "Built for creators."].map(
-            (text, idx) => (
-              <motion.span
-                key={idx}
-                className="block"
-                variants={{
-                  initial: { opacity: 0, x: idx === 0 ? -50 : 50 },
-                  animate: {
-                    opacity: 1,
-                    x: 0,
-                    transition: {
-                      type: "spring",
-                      stiffness: 100,
-                      damping: 10,
-                    },
+          {["Social Media Tipping Layer"].map((text, idx) => (
+            <motion.span
+              key={idx}
+              className="block"
+              variants={{
+                initial: { opacity: 0, x: idx === 0 ? -50 : 50 },
+                animate: {
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 10,
                   },
-                }}
-              >
-                {idx === 1 ? (
-                  <motion.span
-                    className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent"
-                    animate={{
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                    }}
-                  >
-                    {text}
-                  </motion.span>
-                ) : (
-                  text
-                )}
-              </motion.span>
-            )
-          )}
+                },
+              }}
+            >
+              {idx === 1 ? (
+                <motion.span
+                  className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                  }}
+                >
+                  {text}
+                </motion.span>
+              ) : (
+                text
+              )}
+            </motion.span>
+          ))}
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
-          className="mx-auto mt-6 max-w-2xl text-xl text-gray-300"
+          className="mx-auto mt-4 sm:mt-6 max-w-md sm:max-w-xl md:max-w-2xl text-base sm:text-lg md:text-xl text-gray-300"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -143,7 +141,7 @@ const Hero = () => {
 
         {/* Buttons */}
         <motion.div
-          className="mt-8 flex justify-center gap-4"
+          className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-4"
           initial="initial"
           animate="animate"
           variants={{
@@ -159,7 +157,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="z-20 text-lg px-8 py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
+                className="z-20 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
               >
                 How It Works
               </Button>

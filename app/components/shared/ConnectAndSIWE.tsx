@@ -67,7 +67,7 @@ export function ConnectAndSIWE() {
       <Button
         onClick={() => connect({ connector: cbWalletConnector })}
         size="lg"
-        className="group relative cursor-pointer overflow-hidden rounded-xl px-8 text-lg font-semibold  transition-all hover:scale-105 hover:shadow-xl hover:brightness-110  bg-gradient-to-r from-secondary to-secondary py-6"
+        className="z-20 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
       >
         Get Started
       </Button>
