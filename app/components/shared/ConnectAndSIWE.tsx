@@ -68,7 +68,7 @@ export function ConnectAndSIWE() {
   const handleConnect = async () => {
     try {
       setLoadingAction("connect");
-      await connect({ connector: cbWalletConnector });
+      connect({ connector: cbWalletConnector });
     } catch (err) {
       console.error("Wallet connection failed:", err);
     } finally {
@@ -83,7 +83,7 @@ export function ConnectAndSIWE() {
           onClick={handleDashboard}
           size="lg"
           disabled={loadingAction === "dashboard"}
-          className="z-20 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
+          className="z-20 text-sm sm:text-lg px-3 sm:px-8 py-1.5 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
         >
           {loadingAction === "dashboard" ? "Redirecting..." : "Go to Dashboard"}
         </Button>
@@ -94,7 +94,7 @@ export function ConnectAndSIWE() {
           onClick={handleGetStarted}
           size="lg"
           disabled={loadingAction === "getStarted"}
-          className="z-20 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
+          className="z-20 text-sm sm:text-lg px-3 sm:px-8 py-1.5 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
         >
           {loadingAction === "getStarted" ? "Connecting..." : "Get Started"}
         </Button>
@@ -105,7 +105,7 @@ export function ConnectAndSIWE() {
           onClick={handleConnect}
           size="lg"
           disabled={loadingAction === "connect"}
-          className="z-20 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
+          className="z-20 text-sm sm:text-lg px-3 sm:px-8 py-1.5 sm:py-6 rounded-xl border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-gray-200 cursor-pointer"
         >
           {loadingAction === "connect" ? "Connecting..." : "Connect Wallet"}
         </Button>
