@@ -73,7 +73,7 @@ const Campaign = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto min-h-screen">
+    <div className="py-6 px-2 max-w-7xl mx-auto min-h-screen">
       <Banner />
       <div className="flex justify-between items-center mb-6">
         <div>

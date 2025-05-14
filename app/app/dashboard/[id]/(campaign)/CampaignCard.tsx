@@ -34,8 +34,8 @@ const CampaignCard = (campaign: CampaignType) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-[#FAF3E0]/80 text-sm">
-          {campaign.description.length > 20
-            ? `${campaign.description.slice(0, 20)}...`
+          {campaign.description.length > 70
+            ? `${campaign.description.slice(0, 70)}...`
             : campaign.description}
         </p>
         <div className="space-y-2">
@@ -54,7 +54,7 @@ const CampaignCard = (campaign: CampaignType) => {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <span className="text-sm text-red-400">
+        <span className="text-sm text-[#C67F43]">
           {(() => {
             const endDate = new Date(campaign.end_date);
             const today = new Date();

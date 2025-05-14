@@ -48,7 +48,7 @@ const CampaignDetail = (campaign: CampaignType) => {
               height={300}
               src={"/camp.png"}
               alt={campaign?.title || "Campaign Image"}
-              className="w-full h-60 object-cover rounded-xl border border-[#3A2F26]"
+              className="w-full h-72 object-cover rounded-xl border border-[#3A2F26]"
             />
           </div>
 
@@ -77,13 +77,7 @@ const CampaignDetail = (campaign: CampaignType) => {
                 Description
               </p>
               <p className="text-[#E5DCC3] text-sm leading-relaxed">
-                {campaign?.description} Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. Odit, nesciunt saepe. Labore earum magni
-                quibusdam nulla quia reprehenderit distinctio fuga reiciendis
-                voluptatem excepturi velit omnis corporis, nemo quisquam a
-                fugiat magnam ipsam! Temporibus minus perferendis eaque tenetur
-                accusamus dolorem culpa libero facilis esse porro quo at, omnis
-                veniam velit.
+                {campaign?.description}
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
