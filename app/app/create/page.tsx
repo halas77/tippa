@@ -11,7 +11,8 @@ import { toast } from "sonner";
 import { supabase } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import { useAccount } from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
+import { ABI, CONTRACT_ADDRESS } from "../../lib/abi";
 
 type FormData = {
   name: string;
@@ -37,9 +38,19 @@ export default function CreatePage() {
 
   const [checking, setChecking] = useState(false);
   const [isUnique, setIsUnique] = useState(false);
+  const { writeContractAsync } = useWriteContract();
 
   const onSubmit = async (data: FormData) => {
-    const creatorLink = "http://localhost:3000/" + data.name;
+    const tx = await writeContractAsync({
+      abi: ABI.abi,
+      address: CONTRACT_ADDRESS,
+      functionName: "registerCreator",
+      args: [account.address],
+    });
+
+    console.log("tx", tx);
+
+    const creatorLink = "https://tippa.vercel.app/" + data.name;
 
     const { data: insertedData, error } = await supabase
       .from("creators")
@@ -60,8 +71,8 @@ export default function CreatePage() {
 
     if (error) {
       console.error("Error inserting data:", error);
-      toast.error("Error!", {
-        description: "Failed to create user.",
+      toast.error("Transaction failed", {
+        description: "Unable to complete transaction. Please try again.",
       });
     } else {
       toast.success("Success!", {

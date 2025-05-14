@@ -24,6 +24,8 @@ contract DeployTipJar is Script {
     }
 }
 
-// contract - 0x782fF4C029a798C2A354dFb5A1C49CbEDcfCEDf8
-// tnxHash - 0x8114eb22b4473d95a5f2a764bc12c365a0d12357550732d3a2b4fa64650ef54b
-// deployer -  0xD4517B0EaddDED64bA75A65E67e2CEb1B6B0f4Fe
+// forge create --rpc-url $BASE_SEPOLIA_RPC --private-key $PRIVATE_KEY src/TipJar.sol:TipJar --broadcast   --constructor-args 0x036CbD53842c5426634e7929541eC2318f3dCF7e "https://tippa.vercel.app/"
+
+// Deployer: 0xD4517B0EaddDED64bA75A65E67e2CEb1B6B0f4Fe
+// Deployed to: 0xd5bf1cA66da3AA805c10Cb34a61Fc1C714F9a70D
+// Transaction hash: 0x2106b5da568270c47ef908535d2ada7c5ace9aa760e194323b7d16bd22514e92

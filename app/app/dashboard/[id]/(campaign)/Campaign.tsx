@@ -6,6 +6,7 @@ import CampaignCard, { CampaignType } from "./CampaignCard";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useParams } from "next/navigation";
+import Banner from "./Banner";
 
 const Campaign = () => {
   const [data, setData] = useState<CampaignType[]>();
@@ -49,8 +50,9 @@ const Campaign = () => {
 
   if (data.length === 0) {
     return (
-      <div className="p-6 max-w-7xl mx-auto min-h-screen">
-        <div className="flex justify-between items-center mb-6">
+      <div className="py-6 px-2 max-w-7xl mx-auto min-h-screen">
+        <Banner />
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
           <div>
             <h3 className=" text-2xl font-semibold">Campaigns</h3>
             <p className="text-xs opacity-80">
@@ -72,6 +74,7 @@ const Campaign = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto min-h-screen">
+      <Banner />
       <div className="flex justify-between items-center mb-6">
         <div>
           <h3 className=" text-2xl font-semibold">Campaigns</h3>

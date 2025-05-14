@@ -49,7 +49,7 @@ export function ConnectAndSIWE() {
   const handleGetStarted = async () => {
     try {
       setLoadingAction("getStarted");
-      await connect({ connector: cbWalletConnector });
+      connect({ connector: cbWalletConnector });
       window.location.href = "/create";
     } catch (err) {
       console.error("Wallet connection failed:", err);
