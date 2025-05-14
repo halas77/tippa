@@ -12,7 +12,7 @@ import { supabase } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useAccount, useWriteContract } from "wagmi";
-import { ABI, CONTRACT_ADDRESS } from "../../lib/abi";
+import { TIPJAR_ABI, CONTRACT_ADDRESS } from "../../lib/abi";
 
 type FormData = {
   name: string;
@@ -41,14 +41,12 @@ export default function CreatePage() {
   const { writeContractAsync } = useWriteContract();
 
   const onSubmit = async (data: FormData) => {
-    const tx = await writeContractAsync({
-      abi: ABI.abi,
+    await writeContractAsync({
+      abi: TIPJAR_ABI.abi,
       address: CONTRACT_ADDRESS,
       functionName: "registerCreator",
       args: [account.address],
     });
-
-    console.log("tx", tx);
 
     const creatorLink = "https://tippa.vercel.app/" + data.name;
 

@@ -13,6 +13,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import NotFound from "@/components/shared/NotFound";
 import Loading from "@/components/shared/Loading";
+import { useAccount } from "wagmi";
+import useSendTip from "@/lib/tip";
 
 type FormData = {
   amount: string;
@@ -29,6 +31,7 @@ export interface CreatorInfo {
   tiktok: string;
   twitter: string;
   youtube: string;
+  address: `0x${string}`;
 }
 
 const TIP_AMOUNTS = [5, 10, 20, 50];
@@ -47,6 +50,8 @@ export default function TipPage() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
+
+  const account = useAccount();
 
   const handleTipSelect = (amount: number) => {
     setSelectedAmount(amount);
@@ -84,12 +89,21 @@ export default function TipPage() {
     }
   }, [username]);
 
+  const { handleTip } = useSendTip();
+
   const onSubmit = async (data: FormData) => {
+    console.log("userData", userData);
+
+    if (userData?.address) {
+      const res = await handleTip(userData.address, data.amount);
+      console.log("res", res);
+    }
+
     const { data: tipData, error } = await supabase
       .from("history")
       .insert([
         {
-          tipper: "0xD4517B0EaddDED64bA75A65E67e2CEb1B6B0f4Fe",
+          tipper: account.address,
           amount: parseFloat(data.amount),
           message: data.message,
           creator_id: userData?.id,
@@ -257,7 +271,6 @@ export default function TipPage() {
                     className="bg-[#1A120B]/50 border-[#3A2F26] focus:ring-2 mt-2 focus:ring-[#D2B48C] text-[#E5DCC3] placeholder-[#3A2F26]"
                     maxLength={100}
                     {...register("message", {
-                      required: "* Message is required",
                       maxLength: {
                         value: 100,
                         message: "* Message cannot exceed 100 characters",
