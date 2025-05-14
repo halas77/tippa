@@ -53,7 +53,7 @@ const AddCampaign = ({ fetchData }: { fetchData: () => void }) => {
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
 
-    const campaign_url = `localhost:3000/campaigns/${data?.title}`;
+    const campaign_url = `https://tippa.vercel.app/campaigns/${data?.title}`;
     const { error } = await supabase.from("campaigns").insert([
       {
         title: data.title,

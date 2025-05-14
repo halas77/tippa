@@ -7,7 +7,7 @@ import React from "react";
 const SuccessPage = () => {
   const { id } = useParams();
 
-  const tipUrl = `localhost:3000/tip/${id}`;
+  const tipUrl = `https://tippa.vercel.app/tip/${id}`;
 
   const tweetText = encodeURIComponent(
     `I just sent a tip using this amazing platform! 🌟 
