@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle } from "lucide-react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import React from "react";
 
@@ -21,7 +21,15 @@ const SuccessPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br  px-4">
       <div className="bg-gradient-to-br from-[#2C2011] to-[#1A120B] p-8 rounded-2xl shadow-xl text-center max-w-md w-full">
-        <CheckCircle className="text-primary mx-auto mb-4" size={48} />
+        <div className="relative rounded-xl overflow-hidden mb-4 ">
+          <Image
+            width={100}
+            height={100}
+            src={"/like.gif"}
+            alt="Tip content"
+            className="w-full h-full object-cover"
+          />
+        </div>
         <h1 className="text-2xl font-bold text-primary mb-2">Success!</h1>
         <p className="text-gray-300 mb-6">
           Your tip has been sent successfully. Thank you for using our platform!

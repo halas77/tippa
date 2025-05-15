@@ -10,7 +10,7 @@ const CampaignInfo = (campaign: CampaignType) => {
     >
       <div className="w-full rounded-2xl">
         <Image
-          src={"/faitto.png"}
+          src={"/place.png"}
           width={200}
           height={200}
           alt={campaign?.title || "Campaign image"}

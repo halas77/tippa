@@ -8,7 +8,7 @@ interface TipCardProps {
   tipperAddress: string;
   message?: string;
   timestamp: string;
-  transactionHash: string;
+  transactionHash?: string;
 }
 
 const TipCard = ({
@@ -50,7 +50,7 @@ const TipCard = ({
       </div>
 
       {/* Message */}
-      {message && (
+      {message !== "No message provided" && (
         <div className="mb-4">
           <p className="text-gray-300 italic">&quot;{message}&quot;</p>
         </div>
@@ -64,7 +64,7 @@ const TipCard = ({
         </div>
 
         <Link
-          href={`https://etherscan.io/tx/${transactionHash}`}
+          href={`https://sepolia.basescan.org/tx/${transactionHash}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-primary hover:text-[#F5B458] transition-colors"

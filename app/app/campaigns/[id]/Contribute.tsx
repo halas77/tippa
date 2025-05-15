@@ -64,7 +64,7 @@ const Contribute = ({
     <div className="grid grid-cols-1 md:grid-cols-1 gap-8 bg-[#2C2011] border border-[#3A2F26] rounded-2xl p-6">
       <div className="w-full rounded-2xl">
         <Image
-          src={"/faitto.png"}
+          src={"/place.png"}
           width={200}
           height={200}
           alt={"Campaign image"}

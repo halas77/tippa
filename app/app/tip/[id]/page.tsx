@@ -10,6 +10,7 @@ interface UserData {
   amount: string;
   tipper: string;
   message: string;
+  tx_hash: string;
   created_at: string;
 }
 
@@ -52,7 +53,7 @@ const Page = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br px-4">
       <TipCard
-        imageUrl="/next.svg"
+        imageUrl="/10.webp"
         amount={userData?.amount || "0.00"}
         tipperAddress={userData?.tipper || "0x123...abc"}
         message={userData?.message || "No message provided"}
@@ -61,7 +62,7 @@ const Page = () => {
             ? new Date(userData.created_at).toLocaleString()
             : "N/A"
         }
-        transactionHash="0x123...abc"
+        transactionHash={userData?.tx_hash}
       />
     </div>
   );
