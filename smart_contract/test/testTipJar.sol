@@ -13,16 +13,12 @@ contract TipJarTest is Test {
 
     string constant creatorName = "Dawit";
     uint256 constant tipAmount = 100 * 1e8;
-    uint256 tipperPrivateKey =
-        0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a;
 
     function setUp() public {
         usdc = new ERC20PermitMock();
         tipJar = new TipJar(address(usdc), "https://tippa.vercel.app/");
 
         // Get the correct address from private key
-        tipper = vm.addr(tipperPrivateKey);
-
         vm.startPrank(tipper);
         usdc.mint(tipper, tipAmount * 10);
         usdc.approve(address(tipJar), tipAmount * 10);

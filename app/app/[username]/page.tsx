@@ -89,38 +89,41 @@ export default function TipPage() {
     }
   }, [username]);
 
-  const { handleTip } = useSendTip();
+  const { approveAllowance, handleTip } = useSendTip();
 
   const onSubmit = async (data: FormData) => {
-    console.log("userData", userData);
+    let tipTxHash: `0x${string}` | undefined;
+    const allowanceTxHash = await approveAllowance(data.amount);
 
-    if (userData?.address) {
-      const res = await handleTip(userData.address, data.amount);
-      console.log("res", res);
+    if (userData?.address && allowanceTxHash) {
+      tipTxHash = await handleTip(userData.address, data.amount);
     }
 
-    const { data: tipData, error } = await supabase
-      .from("history")
-      .insert([
-        {
-          tipper: account.address,
-          amount: parseFloat(data.amount),
-          message: data.message,
-          creator_id: userData?.id,
-        },
-      ])
-      .select("id")
-      .single();
+    if (tipTxHash) {
+      const { data: tipData, error } = await supabase
+        .from("history")
+        .insert([
+          {
+            tipper: account.address,
+            amount: parseFloat(data.amount),
+            message: data.message,
+            tx_hash: tipTxHash,
+            creator_id: userData?.id,
+          },
+        ])
+        .select("id")
+        .single();
 
-    if (error) {
-      console.error("Error inserting tip data:", error.message);
-    } else {
-      console.log("Tip data inserted successfully:", tipData);
-      toast.success("Success!", {
-        description: `You have successfully tipped ${data.amount} USDC.`,
-      });
-      reset();
-      window.location.href = `/success/${tipData?.id}`;
+      if (error) {
+        console.error("Error inserting tip data:", error.message);
+      } else {
+        console.log("Tip data inserted successfully:", tipData);
+        toast.success("Success!", {
+          description: `You have successfully tipped ${data.amount} USDC.`,
+        });
+        reset();
+        window.location.href = `/success/${tipData?.id}`;
+      }
     }
   };
 

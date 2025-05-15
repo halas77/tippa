@@ -90,7 +90,7 @@ const Hero = () => {
           initial="initial"
           animate="animate"
         >
-          {["Social Media Tipping Layer"].map((text, idx) => (
+          {["Social Network's Tipping Layer"].map((text, idx) => (
             <motion.span
               key={idx}
               className="block"
