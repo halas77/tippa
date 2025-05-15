@@ -63,21 +63,14 @@ contract TipJar is ERC721URIStorage, ReentrancyGuard {
     /// @notice Tip a registered creator; mints an NFT reward to the tipper
     /// @param _creator Creator address
     /// @param _amount Amount to tip
-    /// @param _deadline ERC-2612 permit deadline
-    /// @param _v,_r,_s ERC-2612 signature components
     function tipCreator(
         address _creator,
-        uint256 _amount,
-        uint256 _deadline,
-        uint8 _v,
-        bytes32 _r,
-        bytes32 _s
+        uint256 _amount
     ) external nonReentrant {
         if (!isCreator[_creator]) revert NotRegistered();
         if (_amount == 0) revert InvalidAmount();
 
         // Approve and pull tokens
-        token.permit(msg.sender, address(this), _amount, _deadline, _v, _r, _s);
         token.transferFrom(msg.sender, _creator, _amount);
 
         // Update creator's balance

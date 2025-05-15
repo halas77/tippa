@@ -25,6 +25,7 @@ contract TipJarTest is Test {
 
         vm.startPrank(tipper);
         usdc.mint(tipper, tipAmount * 10);
+        usdc.approve(address(tipJar), tipAmount * 10);
         vm.stopPrank();
     }
 
@@ -37,37 +38,8 @@ contract TipJarTest is Test {
         tipJar.registerCreator(creator);
 
         // Get current nonce from token contract
-        uint256 nonce = usdc.nonces(tipper);
-
-        (uint8 v, bytes32 r, bytes32 s) = vm.sign(
-            tipperPrivateKey,
-            keccak256(
-                abi.encodePacked(
-                    "\x19\x01",
-                    usdc.DOMAIN_SEPARATOR(),
-                    keccak256(
-                        abi.encode(
-                            usdc.PERMIT_TYPEHASH(),
-                            tipper,
-                            address(tipJar),
-                            tipAmount,
-                            nonce,
-                            block.timestamp + 1 hours
-                        )
-                    )
-                )
-            )
-        );
-
         vm.startPrank(tipper);
-        tipJar.tipCreator(
-            creator,
-            tipAmount,
-            block.timestamp + 1 hours,
-            v,
-            r,
-            s
-        );
+        tipJar.tipCreator(creator, tipAmount);
         vm.stopPrank();
 
         assertEq(usdc.balanceOf(creator), tipAmount);
