@@ -14,7 +14,7 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-[#1A120B] text-[#E5DCC3] px-4 py-8 flex justify-center">
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-6xl space-y-8">
         <Tabs defaultValue="dashboard">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 md:gap-0">

@@ -8,6 +8,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { customScrollBar } from "@/lib/utils";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 interface PropTypes {
   historyData: {
@@ -15,6 +17,7 @@ interface PropTypes {
     tipper: string;
     amount: string;
     message: string;
+    tx_hash: string;
   }[];
 }
 
@@ -34,6 +37,16 @@ const RecentActivity = ({ historyData }: PropTypes) => {
       {tip.message && (
         <p className="text-xs mt-2 text-[#D2B48C]">&quot;{tip.message}&quot;</p>
       )}
+
+      <Link
+        href={`https://sepolia.basescan.org/tx/${tip?.tx_hash}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1 text-primary hover:text-[#F5B458] transition-colors mt-1 text-xs"
+      >
+        <ExternalLink className="w-3 h-3" />
+        <span>View Transaction</span>
+      </Link>
     </div>
   );
 
