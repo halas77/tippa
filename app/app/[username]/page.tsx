@@ -218,7 +218,7 @@ export default function TipPage() {
 
           <CardContent className="pb-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {!queryAmount && isNaN(Number(queryAmount)) ? (
+              {!queryAmount ? (
                 <div className="space-y-4">
                   <label className="text-sm text-[#E5DCC3] block">
                     {selectedAmount ? "Selected Amount" : "Choose Amount"}{" "}
