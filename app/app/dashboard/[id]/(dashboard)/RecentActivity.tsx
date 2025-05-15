@@ -44,8 +44,8 @@ const RecentActivity = ({ historyData }: PropTypes) => {
         rel="noopener noreferrer"
         className="flex items-center gap-1 text-primary hover:text-[#F5B458] transition-colors mt-1 text-xs"
       >
-        <ExternalLink className="w-3 h-3" />
         <span>View Transaction</span>
+        <ExternalLink className="w-3 h-3" />
       </Link>
     </div>
   );
@@ -61,8 +61,8 @@ const RecentActivity = ({ historyData }: PropTypes) => {
             No recent activity
           </div>
         )}
-        {historyData.toReversed().slice(0, 2).map(renderHistoryItem)}
-        {historyData.length > 2 && (
+        {historyData.toReversed().slice(0, 1).map(renderHistoryItem)}
+        {historyData.length > 1 && (
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <button className="text-xs text-[#D2B48C] underline ml-auto block cursor-pointer">

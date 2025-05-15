@@ -66,7 +66,7 @@ const TipPage = ({
             <div className="flex-1 bg-[#1A120B] p-2 rounded border border-[#3A2F26]">
               <p className="text-sm text-[#E5DCC3]/90 truncate">
                 {" "}
-                {tipLink2.slice(0, 30)}...
+                {tipLink.slice(0, 30)}...
               </p>
             </div>
             <Button

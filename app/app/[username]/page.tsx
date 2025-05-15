@@ -15,6 +15,7 @@ import NotFound from "@/components/shared/NotFound";
 import Loading from "@/components/shared/Loading";
 import { useAccount } from "wagmi";
 import useSendTip from "@/lib/tip";
+import { useSearchParams } from "next/navigation";
 
 type FormData = {
   amount: string;
@@ -52,6 +53,20 @@ export default function TipPage() {
   } = useForm<FormData>();
 
   const account = useAccount();
+
+  const searchParams = useSearchParams();
+  const queryAmount = searchParams?.get("amount");
+
+  console.log("first", queryAmount);
+
+  useEffect(() => {
+    if (queryAmount && !isNaN(Number(queryAmount))) {
+      setSelectedAmount(Number(queryAmount));
+      setIsCustomAmount(false);
+      setValue("amount", queryAmount);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryAmount]);
 
   const handleTipSelect = (amount: number) => {
     setSelectedAmount(amount);
@@ -203,64 +218,93 @@ export default function TipPage() {
 
           <CardContent className="pb-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="space-y-4">
-                <label className="text-sm text-[#E5DCC3] block">
-                  {selectedAmount ? "Selected Amount" : "Choose Amount"} (USDC)
-                </label>
+              {!queryAmount && isNaN(Number(queryAmount)) ? (
+                <div className="space-y-4">
+                  <label className="text-sm text-[#E5DCC3] block">
+                    {selectedAmount ? "Selected Amount" : "Choose Amount"}{" "}
+                    (USDC)
+                  </label>
 
-                {!isCustomAmount && (
-                  <div className="grid grid-cols-2 gap-3">
-                    {TIP_AMOUNTS.map((amount) => (
-                      <Button
-                        key={amount}
-                        type="button"
-                        className={`${
-                          selectedAmount === amount
-                            ? "bg-secondary/30 text-white border border-secondary hover:cursor-not-allowed hover:bg-secondary/30"
-                            : "border-secondary bg-primary text-secondary-foreground hover:bg-secondary/80"
-                        } h-12 rounded-lg font-medium transition-all cursor-pointer`}
-                        onClick={() => handleTipSelect(amount)}
-                      >
-                        {amount} USDC
-                      </Button>
-                    ))}
-                  </div>
-                )}
+                  {!isCustomAmount && (
+                    <div className="grid grid-cols-2 gap-3">
+                      {TIP_AMOUNTS.map((amount) => (
+                        <Button
+                          key={amount}
+                          type="button"
+                          className={`${
+                            selectedAmount === amount
+                              ? "bg-secondary/30 text-white border border-secondary hover:cursor-not-allowed hover:bg-secondary/30"
+                              : "border-secondary bg-primary text-secondary-foreground hover:bg-secondary/80"
+                          } h-12 rounded-lg font-medium transition-all cursor-pointer`}
+                          onClick={() => handleTipSelect(amount)}
+                        >
+                          {amount} USDC
+                        </Button>
+                      ))}
+                    </div>
+                  )}
 
-                {!isCustomAmount && (
-                  <p
-                    className="cursor-pointer text-primary text-end py-4 text-sm underline inline-flex"
-                    onClick={() => setIsCustomAmount(true)}
-                  >
-                    Enter Custom Amount
-                  </p>
-                )}
+                  {!isCustomAmount && (
+                    <p
+                      className="cursor-pointer text-primary text-end py-4 text-sm underline inline-flex"
+                      onClick={() => setIsCustomAmount(true)}
+                    >
+                      Enter Custom Amount
+                    </p>
+                  )}
 
-                {isCustomAmount && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="space-y-2"
-                  >
-                    <Input
-                      placeholder="Enter amount in USDC"
-                      className="bg-[#1A120B]/50 border-[#3A2F26] focus:ring-2 focus:ring-[#D2B48C] text-[#E5DCC3] placeholder-[#3A2F26] py-5 text-start"
-                      {...register("amount", {
-                        required: "Amount is required",
-                        pattern: {
-                          value: /^\d*\.?\d+$/,
-                          message: "Enter a valid number",
+                  {isCustomAmount && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="space-y-2"
+                    >
+                      <Input
+                        placeholder="Enter amount in USDC"
+                        className="bg-[#1A120B]/50 border-[#3A2F26] focus:ring-2 focus:ring-[#D2B48C] text-[#E5DCC3] placeholder-[#3A2F26] py-5 text-start"
+                        {...register("amount", {
+                          required: "Amount is required",
+                          pattern: {
+                            value: /^\d*\.?\d+$/,
+                            message: "Enter a valid number",
+                          },
+                        })}
+                      />
+                      {errors.amount && (
+                        <p className="text-sm text-red-400 mt-1">
+                          {errors.amount.message}
+                        </p>
+                      )}
+                    </motion.div>
+                  )}
+
+                  <div className="space-y-2">
+                    <label className="text-sm text-[#E5DCC3] flex justify-between">
+                      Message (Optional)
+                      <span className="ml-2 text-[#E5DCC3] text-xs ">
+                        {watch("message")?.length || 0}/100
+                      </span>
+                    </label>
+                    <Textarea
+                      rows={4}
+                      placeholder="Write a message to your favorite creator..."
+                      className="bg-[#1A120B]/50 border-[#3A2F26] focus:ring-2 mt-2 focus:ring-[#D2B48C] text-[#E5DCC3] placeholder-[#3A2F26]"
+                      maxLength={100}
+                      {...register("message", {
+                        maxLength: {
+                          value: 100,
+                          message: "* Message cannot exceed 100 characters",
                         },
                       })}
                     />
-                    {errors.amount && (
-                      <p className="text-sm text-red-400 mt-1">
-                        {errors.amount.message}
+                    {errors.message && (
+                      <p className="text-sm text-red-400">
+                        {errors.message.message}
                       </p>
                     )}
-                  </motion.div>
-                )}
-
+                  </div>
+                </div>
+              ) : (
                 <div className="space-y-2">
                   <label className="text-sm text-[#E5DCC3] flex justify-between">
                     Message (Optional)
@@ -286,7 +330,7 @@ export default function TipPage() {
                     </p>
                   )}
                 </div>
-              </div>
+              )}
 
               <Button
                 type="submit"
