@@ -17,7 +17,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const AddTipAmount = ({ tipLink }: { tipLink: string }) => {
+const AddTipAmount = ({
+  tipLink,
+  fetchCreatorData,
+}: {
+  tipLink: string;
+  fetchCreatorData: () => void;
+}) => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -47,6 +53,7 @@ const AddTipAmount = ({ tipLink }: { tipLink: string }) => {
         description: "Your link has been launched and is now live.",
       });
       setOpen(false);
+      fetchCreatorData();
       reset();
     }
   };

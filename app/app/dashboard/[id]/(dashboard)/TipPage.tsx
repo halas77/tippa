@@ -12,9 +12,11 @@ import { toast } from "sonner";
 const TipPage = ({
   tipLink,
   tipLink2,
+  fetchCreatorData,
 }: {
   tipLink: string;
   tipLink2: string;
+  fetchCreatorData: () => void;
 }) => {
   const [copied, setCopied] = useState(false);
   const [copied2, setCopied2] = useState(false);
@@ -48,6 +50,7 @@ const TipPage = ({
       });
     } else {
       toast.success("Tip Amount deleted successfully!");
+      fetchCreatorData();
     }
     setDeleting(false);
   }
@@ -58,7 +61,12 @@ const TipPage = ({
         <CardHeader>
           <div className="flex justify-between items-center">
             <span className="text-sm text-[#D2B48C]">Your Tip Page</span>
-            {!tipLink2 && <AddTipAmount tipLink={tipLink} />}
+            {!tipLink2 && (
+              <AddTipAmount
+                tipLink={tipLink}
+                fetchCreatorData={fetchCreatorData}
+              />
+            )}
           </div>
         </CardHeader>
         <CardContent className="space-y-2">
@@ -70,8 +78,9 @@ const TipPage = ({
               </p>
             </div>
             <Button
+              size={"sm"}
               onClick={() => handleCopy(tipLink, true)}
-              className="bg-[#D2B48C] text-[#1A120B] hover:bg-[#caa97f] h-9 w-9 p-2 cursor-pointer"
+              className="bg-[#D2B48C] text-[#1A120B] hover:bg-[#caa97f] cursor-pointer"
             >
               {copied ? <CheckIcon size={18} /> : <CopyIcon size={18} />}
             </Button>

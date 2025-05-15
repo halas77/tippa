@@ -52,38 +52,39 @@ const Welcome: React.FC = () => {
 
   const { id } = useParams();
 
+  const fetchCreatorData = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("creators")
+        .select("*, history(*)")
+        .eq("id", id)
+        .single();
+
+      if (error) throw error;
+
+      reset({
+        message: data.message || "You don't have a welcome message yet.",
+        twitter: data.twitter || "No X (Twitter) link provided.",
+        instagram: data.instagram || "No Instagram link provided.",
+        tiktok: data.tiktok || "No Tiktok link provided.",
+        youtube: data.youtube || "No YouTube link provided.",
+        creator_link: data.creator_link || "",
+      });
+
+      setTipLink(data.creator_link || "");
+      setTipLink2(data.creator_link2 || "");
+      setHistoryData(data.history || []);
+    } catch (error) {
+      console.error("Error fetching creator data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data, error } = await supabase
-          .from("creators")
-          .select("*, history(*)")
-          .eq("id", id)
-          .single();
-
-        if (error) throw error;
-
-        reset({
-          message: data.message || "You don't have a welcome message yet.",
-          twitter: data.twitter || "No X (Twitter) link provided.",
-          instagram: data.instagram || "No Instagram link provided.",
-          tiktok: data.tiktok || "No Tiktok link provided.",
-          youtube: data.youtube || "No YouTube link provided.",
-          creator_link: data.creator_link || "",
-        });
-
-        setTipLink(data.creator_link || "");
-        setTipLink2(data.creator_link2 || "");
-        setHistoryData(data.history || []);
-      } catch (error) {
-        console.error("Error fetching creator data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) fetchData();
+    if (id) fetchCreatorData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, reset]);
 
   const handleEditWelcomeMessage = async (newMessage: string) => {
@@ -270,7 +271,11 @@ const Welcome: React.FC = () => {
         </Card>
       </div>
       <div className="space-y-6">
-        <TipPage tipLink={tipLink} tipLink2={tipLink2} />
+        <TipPage
+          tipLink={tipLink}
+          tipLink2={tipLink2}
+          fetchCreatorData={fetchCreatorData}
+        />
         <RecentActivity historyData={historyData} />
       </div>
     </div>
