@@ -29,6 +29,7 @@ const Welcome: React.FC = () => {
   const [isSocialsLoading, setIsSocialsLoading] = useState(false);
   const [editingWelcome, setEditingWelcome] = useState(false);
   const [tipLink, setTipLink] = useState("");
+  const [tipLink2, setTipLink2] = useState("");
   const [editingSocials, setEditingSocials] = useState<string | null>(null);
   const [historyData, setHistoryData] = useState([]);
 
@@ -73,6 +74,7 @@ const Welcome: React.FC = () => {
         });
 
         setTipLink(data.creator_link || "");
+        setTipLink2(data.creator_link2 || "");
         setHistoryData(data.history || []);
       } catch (error) {
         console.error("Error fetching creator data:", error);
@@ -268,7 +270,7 @@ const Welcome: React.FC = () => {
         </Card>
       </div>
       <div className="space-y-6">
-        <TipPage tipLink={tipLink} />
+        <TipPage tipLink={tipLink} tipLink2={tipLink2} />
         <RecentActivity historyData={historyData} />
       </div>
     </div>
