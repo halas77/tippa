@@ -3,10 +3,13 @@ import { useAccount, useConnect } from "wagmi";
 import { cbWalletConnector } from "@/wagmi";
 import { Button } from "../ui/button";
 import { supabase } from "@/lib/utils";
+import { Skeleton } from "../ui/skeleton";
 
 export function ConnectAndSIWE() {
   const { connect } = useConnect();
   const { address, isConnected } = useAccount();
+
+  const [loading, setLoading] = useState(false);
 
   const [exists, setExists] = useState<boolean | undefined>(undefined);
   const [userId, setUserId] = useState<string | null>(null);
@@ -15,9 +18,13 @@ export function ConnectAndSIWE() {
   >(null);
 
   const checkAddressExists = useCallback(async () => {
+    setLoading(true);
+
     if (!address) {
       setExists(undefined);
       setUserId(null);
+      setLoading(false);
+
       return;
     }
 
@@ -31,14 +38,17 @@ export function ConnectAndSIWE() {
       if (error) {
         setExists(false);
         setUserId(null);
+        setLoading(false);
       } else if (data) {
         setExists(true);
         setUserId(data.id);
+        setLoading(false);
       }
     } catch (err) {
       console.error("Error checking address existence:", err);
       setExists(false);
       setUserId(null);
+      setLoading(false);
     }
   }, [address]);
 
@@ -75,6 +85,8 @@ export function ConnectAndSIWE() {
       setLoadingAction(null);
     }
   };
+
+  if (loading) return <Skeleton className="h-12 w-40 bg-primary/50" />;
 
   return (
     <div>

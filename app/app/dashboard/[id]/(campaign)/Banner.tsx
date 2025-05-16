@@ -4,7 +4,7 @@ import { Construction } from "lucide-react";
 
 const Banner: React.FC = () => {
   return (
-    <div className="sticky top-0 z-50 w-full -mt-8 mb-10">
+    <div className="sticky top-0 z-50 w-full -mt-8 mb-10 backdrop-blur-md">
       <Alert
         variant="default"
         className="flex items-center justify-between gap-3  bg-primary/10 border-primary/20 "
